@@ -4,6 +4,8 @@ gem 'rails', '3.1.0.rc1'
 
 gem 'pg'
 
+gem 'yajl-ruby'
+
 # Asset template engines
 gem 'json'
 gem 'sass'

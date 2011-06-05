@@ -10,7 +10,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110605030757) do
+ActiveRecord::Schema.define(:version => 20110605032738) do
+
+  create_table "mastery_authorities", :force => true do |t|
+    t.string   "name"
+    t.string   "suite_name"
+    t.string   "cap_name"
+    t.text     "data"
+    t.integer  "vat_id"
+    t.integer  "lock_version", :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "mastery_authorities", ["vat_id"], :name => "index_mastery_authorities_on_vat_id"
 
   create_table "mastery_vats", :force => true do |t|
     t.string   "name"
