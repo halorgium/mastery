@@ -1,7 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 # Pick the frameworks you want:
- require "active_record/railtie"
+require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "active_resource/railtie"
@@ -13,6 +13,8 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Mastery
   class Application < Rails::Application
+    isolate_namespace Mastery
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
