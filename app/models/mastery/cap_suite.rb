@@ -5,7 +5,7 @@ module Mastery
       if caps[name]
         raise "Already defined #{name.inspect}"
       end
-      cap= Cap.new(name)
+      cap = Cap.new(self.name, name)
       cap.instance_eval(&block)
       caps[name] = cap
     end

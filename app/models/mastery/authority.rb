@@ -17,5 +17,9 @@ module Mastery
     def accept(message_name, *args)
       cap.accept(message_name, *args)
     end
+
+    def as_json(*args)
+      cap.as_json(*args)
+    end
   end
 end

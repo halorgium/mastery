@@ -1,6 +1,7 @@
 module Mastery
   class Cap
-    def initialize(name)
+    def initialize(suite_name, name)
+      @suite_name = suite_name
       @name = name
       @messages = {}
     end
@@ -20,6 +21,18 @@ module Mastery
       else
         raise "Invalid message"
       end
+    end
+
+    def full_name
+      "#{@suite_name}.#{@name}"
+    end
+
+    def as_json(*args)
+      as_hash.merge(:class => full_name).as_json(*args)
+    end
+
+    def as_hash
+      {}
     end
   end
 end
