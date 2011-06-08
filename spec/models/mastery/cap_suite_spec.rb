@@ -36,20 +36,26 @@ describe Mastery::CapSuite do
           a - b
         end
       end
+
+      define :passthrough do
+        proxies do |message_name,args|
+          [message_name, args]
+        end
+      end
     end
+  end
+
+  def execute_authority(cap, message_name, *args)
+    authority = FakeAuthority.new(cap, "winner" => "loser")
+    authority.accept(message_name, *args)
   end
 
   it "define caps" do
-    @suite.should have(2).caps
-    @suite.cap_names.sort.should == %w( calculator mirror ).sort
+    @suite.should have(3).caps
+    @suite.cap_names.sort.should == %w( calculator mirror passthrough ).sort
   end
 
   context "with messages" do
-    def execute_authority(cap, message_name, *args)
-      authority = FakeAuthority.new(cap, "winner" => "loser")
-      authority.accept(message_name, *args)
-    end
-
     before(:each) do
       @mirror = @suite[:mirror]
       @calculator = @suite[:calculator]
@@ -76,6 +82,14 @@ describe Mastery::CapSuite do
     it "raises when invalid arity" do
       lambda { execute_authority(@mirror, :echo) }.
         should raise_error("Invalid arity")
+    end
+  end
+
+  context "with a proxy" do
+    it "passes all messages through" do
+      passthrough = @suite[:passthrough]
+      execute_authority(passthrough, :nothing).should == [:nothing, []]
+      execute_authority(passthrough, :single, 1).should == [:single, [1]]
     end
   end
 end

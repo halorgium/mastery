@@ -5,7 +5,11 @@ module Mastery
       @name = name
       @messages = {}
     end
-    attr_reader :name, :messages
+    attr_reader :name, :messages, :proxy
+
+    def proxies(&block)
+      @proxy = block
+    end
 
     def accepts(message_name, &block)
       @messages[message_name.to_s] = block
