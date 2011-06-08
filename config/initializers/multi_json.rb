@@ -6,11 +6,20 @@ module MultiJson
       if json.nil?
         json = "{}"
       end
-      MultiJson.decode(json)
+      object = MultiJson.decode(json)
+      assert_hash(object)
+      object
     end
 
     def self.dump(object)
+      assert_hash(object)
       MultiJson.encode(object)
+    end
+
+    def self.assert_hash(object)
+      unless object.is_a?(Hash)
+        raise "Not a Hash"
+      end
     end
   end
 end
