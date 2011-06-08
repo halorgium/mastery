@@ -15,3 +15,7 @@ gem 'uglifier'
 
 gem 'jquery-rails'
 gem 'rspec-rails'
+
+group :debug do
+  gem 'ruby-debug'
+end
