@@ -88,8 +88,8 @@ describe Mastery::CapSuite do
   context "with a proxy" do
     it "passes all messages through" do
       passthrough = @suite[:passthrough]
-      execute_authority(passthrough, :nothing).should == [:nothing, []]
-      execute_authority(passthrough, :single, 1).should == [:single, [1]]
+      execute_authority(passthrough, :nothing).should == ["nothing", []]
+      execute_authority(passthrough, :single, 1).should == ["single", [1]]
     end
   end
 end

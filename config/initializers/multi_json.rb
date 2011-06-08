@@ -8,7 +8,7 @@ module MultiJson
       end
       object = MultiJson.decode(json)
       assert_hash(object)
-      object
+      object.with_indifferent_access
     end
 
     def self.dump(object)

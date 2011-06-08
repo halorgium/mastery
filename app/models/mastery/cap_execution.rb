@@ -3,7 +3,7 @@ module Mastery
     def accept(message_name, *args)
       if proxy = cap.proxy
         (class << self; self; end).send(:define_method, :__accept__, &proxy)
-        __accept__(message_name, args)
+        __accept__(message_name.to_s, args)
       elsif block = cap[message_name]
         if args.size == block.arity
           (class << self; self; end).send(:define_method, :__accept__, &block)

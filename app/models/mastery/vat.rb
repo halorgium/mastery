@@ -8,7 +8,7 @@ module Mastery
     end
 
     def make_authority(suite_name, cap_name, data)
-      authorities.create!(:name => random_base32(16), :suite_name => suite_name, :cap_name => cap_name, :data => data)
+      authorities.create!(:name => random_base32(16), :suite_name => suite_name, :cap_name => cap_name, :data => data).reload
     end
 
     private
