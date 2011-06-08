@@ -8,19 +8,11 @@ module Mastery
     attr_reader :name, :messages
 
     def accepts(message_name, &block)
-      @messages[message_name] = block
+      @messages[message_name.to_s] = block
     end
 
-    def accept(message_name, *args)
-      if block = @messages[message_name]
-        if args.size == block.arity
-          block[*args]
-        else
-          raise "Invalid arity"
-        end
-      else
-        raise "Invalid message"
-      end
+    def [](message_name)
+      @messages[message_name.to_s]
     end
 
     def full_name

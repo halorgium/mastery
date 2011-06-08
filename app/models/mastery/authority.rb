@@ -1,5 +1,7 @@
 module Mastery
   class Authority < ActiveRecord::Base
+    include CapExecution
+
     serialize :data, MultiJson::Serializer
 
     belongs_to :vat
@@ -12,10 +14,6 @@ module Mastery
 
     def cap
       suite[cap_name]
-    end
-
-    def accept(message_name, *args)
-      cap.accept(message_name, *args)
     end
 
     def as_json(*args)

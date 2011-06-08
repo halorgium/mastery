@@ -1,6 +1,16 @@
 require 'spec_helper'
 
 describe Mastery::CapSuite do
+  class FakeAuthority
+    def initialize(cap, data)
+      @cap = cap
+      @data = data
+    end
+    attr_reader :cap
+
+    include Mastery::CapExecution
+  end
+
   def build(&block)
     Class.new(Mastery::CapSuite, &block)
   end
@@ -35,6 +45,11 @@ describe Mastery::CapSuite do
   end
 
   context "with messages" do
+    def execute_authority(cap, message_name, *args)
+      authority = FakeAuthority.new(cap, "winner" => "loser")
+      authority.accept(message_name, *args)
+    end
+
     before(:each) do
       @mirror = @suite[:mirror]
       @calculator = @suite[:calculator]
@@ -46,20 +61,20 @@ describe Mastery::CapSuite do
     end
 
     it "accepts messages" do
-      @mirror.accept(:echo, "123").should == "123"
-      @mirror.accept(:reverse_echo, "123").should == "321"
+      execute_authority(@mirror, :echo, "123").should == "123"
+      execute_authority(@mirror, :reverse_echo, "123").should == "321"
 
-      @calculator.accept(:add, 123, 321).should == 444
-      @calculator.accept(:substract, 321, 123).should == 198
+      execute_authority(@calculator, :add, 123, 321).should == 444
+      execute_authority(@calculator, :substract, 321, 123).should == 198
     end
 
     it "raises when invalid message" do
-      lambda { @mirror.accept(:missing) }.
+      lambda { execute_authority(@mirror, :missing) }.
         should raise_error("Invalid message")
     end
 
     it "raises when invalid arity" do
-      lambda { @mirror.accept(:echo) }.
+      lambda { execute_authority(@mirror, :echo) }.
         should raise_error("Invalid arity")
     end
   end
