@@ -9,7 +9,7 @@ describe Mastery::AuthoritiesController do
     it "returns the authority" do
       get :show, {:vat_id => @authority.vat_name, :id => @authority.name, :format => :json}
       response.status.should == 200
-      response.body.should == '{"class":"CapSuiteFixtures::Simple.mirror"}'
+      response.body.should == '{"class":"CapSuiteFixtures::Simple.mirror","url":"' + @authority.url + '"}'
     end
   end
 

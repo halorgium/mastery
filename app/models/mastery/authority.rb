@@ -17,7 +17,11 @@ module Mastery
     end
 
     def as_json(*args)
-      cap.as_json(*args)
+      cap.as_json(*args).merge(:url => url).as_json(*args)
+    end
+
+    def url
+      vat.url + "/authorities/#{URI.encode(name)}"
     end
   end
 end

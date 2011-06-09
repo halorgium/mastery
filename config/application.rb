@@ -12,6 +12,10 @@ require "active_resource/railtie"
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Mastery
+  def self.base_url
+    ENV["MASTERY_BASE_URL"] || raise("No base url specified: Use MASTERY_BASE_URL=http://localhost:3000")
+  end
+
   class Application < Rails::Application
     isolate_namespace Mastery
 

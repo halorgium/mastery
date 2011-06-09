@@ -11,6 +11,10 @@ module Mastery
       authorities.create!(:name => random_base32(16), :suite_name => suite_name, :cap_name => cap_name, :data => data).reload
     end
 
+    def url
+      Mastery.base_url + "/vats/#{URI.encode(name)}"
+    end
+
     private
 
     def self.random_base32(size)
