@@ -2,7 +2,7 @@ module CapSuites
   class Eventual < Mastery::CapSuite
     define :factory do
       accepts :make do ||
-        data_factory_authority = vat.make_authority(Data.name, :factory, {})
+        data_factory_authority = vat.make_authority(CapSuites::Data.name, :factory, {})
         metadata_result = data_factory_authority.accept(:make, :resolved => false, :data => nil)
 
         promise_authority = vat.make_authority(Eventual.name, :promise,
