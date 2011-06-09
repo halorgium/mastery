@@ -3,8 +3,8 @@ module CapSuites
     define :factory do
       accepts :make do |data|
         slot_authority = vat.make_authority(Data.name, :slot, data)
-        read_authority = vat.make_authority(Facets.name, :messages, :inner_authority => slot_authority.id, :allowed => [:read])
-        write_authority = vat.make_authority(Facets.name, :messages, :inner_authority => slot_authority.id, :allowed => [:write])
+        read_authority = vat.make_authority(Facets.name, :proxy, :inner_authority => slot_authority.url, :allowed => [:read])
+        write_authority = vat.make_authority(Facets.name, :proxy, :inner_authority => slot_authority.url, :allowed => [:write])
 
         {
           :slot_authority => slot_authority,

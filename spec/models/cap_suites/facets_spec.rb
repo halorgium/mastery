@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe CapSuites::Facets do
-  context "messages" do
+  context "proxy" do
     before(:each) do
       @inner_authority = Mastery::Vat.make(CapSuites::Data.name, :slot, :name => "Bob")
-      @authority = Mastery::Vat.make(CapSuites::Facets.name, :messages, {:inner_authority => @inner_authority.id, :allowed => [:read]})
+      @authority = Mastery::Vat.make(CapSuites::Facets.name, :proxy, {:inner_authority => @inner_authority.url, :allowed => [:read]})
     end
 
     it "filters messages" do
