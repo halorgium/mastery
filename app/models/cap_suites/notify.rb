@@ -31,7 +31,7 @@ module CapSuites
           begin
             authority_for(authority[:url]).accept(:notify, result)
           rescue => e
-            Rails.logger.error("Failed to notify #{authority_url}: #{e.class}: #{e.message}")
+            Rails.logger.error("Failed to notify #{authority.inspect}: #{e.class}: #{e.message}")
           end
         end
         true
