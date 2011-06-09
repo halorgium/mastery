@@ -8,6 +8,10 @@ module Mastery
 
     delegate :name, :to => :vat, :prefix => true
 
+    def store(data)
+      update_attributes!(:data => data.with_indifferent_access)
+    end
+
     def suite
       suite_name.constantize
     end
