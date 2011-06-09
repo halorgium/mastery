@@ -10,7 +10,7 @@ module Rack
           "Content-Type" => "text/plain",
           "Access-Control-Allow-Origin" => "*",
           "Access-Control-Allow-Methods" => "GET, PUT",
-          "Access-Control-Allow-Headers" => env["HTTP_ACCESS_CONTROL_REQUEST_HEADERS"],
+          "Access-Control-Allow-Headers" => env["HTTP_ACCESS_CONTROL_REQUEST_HEADERS"] || "",
         }
         [200, headers, [""]]
       else
