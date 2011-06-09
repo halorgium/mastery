@@ -27,9 +27,9 @@ module CapSuites
       accepts :notify do |result|
         observers_authority = authority(:observers_authority)
         data = observers_authority.accept(:read)
-        data[:authorities].each do |authority_url|
+        data[:authorities].each do |authority|
           begin
-            authority_for(authority_url).accept(:notify, result)
+            authority_for(authority[:url]).accept(:notify, result)
           rescue => e
             Rails.logger.error("Failed to notify #{authority_url}: #{e.class}: #{e.message}")
           end
