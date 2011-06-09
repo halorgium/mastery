@@ -42,6 +42,7 @@ module CapSuites
       accepts :notify do |result|
         data[:results] ||= []
         data[:results] << result
+        store(data)
       end
 
       as_hash do
