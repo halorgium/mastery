@@ -15,5 +15,18 @@ module Mastery
         raise "Invalid message"
       end
     end
+
+    def as_hash
+      if block = cap.hash_block
+        (class << self; self; end).send(:define_method, :__as_hash__, &block)
+        __as_hash__
+      else
+        {}
+      end
+    end
+
+    def as_json(*args)
+      as_hash.merge(:class => cap.full_name, :url => url).as_json(*args)
+    end
   end
 end

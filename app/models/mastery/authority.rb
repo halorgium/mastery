@@ -20,12 +20,14 @@ module Mastery
       suite[cap_name]
     end
 
-    def as_json(*args)
-      cap.as_json(*args).merge(:url => url).as_json(*args)
-    end
-
     def url
       vat.url + "/authorities/#{URI.encode(name)}"
+    end
+
+    def authority(*keys)
+      authority_url = keys.inject(data) {|hash,key| hash.fetch(key)}[:url]
+      authority_name = authority_url.split("/").last
+      Authority.where(:name => authority_name).first
     end
   end
 end

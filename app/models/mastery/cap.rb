@@ -5,10 +5,14 @@ module Mastery
       @name = name
       @messages = {}
     end
-    attr_reader :name, :messages, :proxy
+    attr_reader :name, :messages, :proxy, :hash_block
 
     def proxies(&block)
       @proxy = block
+    end
+
+    def as_hash(&block)
+      @hash_block = block
     end
 
     def accepts(message_name, &block)
@@ -21,14 +25,6 @@ module Mastery
 
     def full_name
       "#{@suite_name}.#{@name}"
-    end
-
-    def as_json(*args)
-      as_hash.merge(:class => full_name).as_json(*args)
-    end
-
-    def as_hash
-      {}
     end
   end
 end
