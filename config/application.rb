@@ -13,7 +13,16 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Mastery
   def self.base_url
-    ENV["MASTERY_BASE_URL"] || raise("No base url specified: Use MASTERY_BASE_URL=http://localhost:3000")
+    ENV["MASTERY_BASE_URL"] ||
+      base_url_from_file ||
+      raise("No base url specified: Use MASTERY_BASE_URL=http://localhost:3000")
+  end
+
+  def self.base_url_from_file
+    filename = "#{Rails.root}/config/base_url"
+    if File.exist?(filename)
+      File.read(filename).chomp
+    end
   end
 
   class Application < Rails::Application
