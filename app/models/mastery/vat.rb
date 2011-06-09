@@ -18,7 +18,7 @@ module Mastery
     private
 
     def self.random_base32(size)
-      bytes = ActiveSupport::SecureRandom.random_bytes(size * 2)
+      bytes = SecureRandom.random_bytes(size * 2)
       base32 = Base32.encode(bytes)
       base32[0, size]
     end
