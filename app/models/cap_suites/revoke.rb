@@ -27,11 +27,6 @@ module CapSuites
       accepts :revoke do ||
         authority(:metadata_authority).accept(:write, {})
       end
-
-      as_hash do
-        metadata = authority(:metadata_authority).accept(:read)
-        metadata.slice(:inner_authority)
-      end
     end
   end
 end
