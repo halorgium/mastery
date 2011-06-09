@@ -1,4 +1,6 @@
 Mastery::Application.routes.draw do
+  resources :spikes
+
   resources :vats do
     resources :authorities
   end
