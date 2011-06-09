@@ -26,8 +26,16 @@ module Mastery
 
     def authority(*keys)
       authority_url = keys.inject(data) {|hash,key| hash.fetch(key)}[:url]
-      authority_name = authority_url.split("/").last
-      Authority.where(:name => authority_name).first
+      authority_for(authority_url)
+    end
+
+    def authority_for(url)
+      if Rails.env == "test"
+        authority_name = url.split("/").last
+        Authority.where(:name => authority_name).first
+      else
+        RemoteAuthority.new(url)
+      end
     end
   end
 end
