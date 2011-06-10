@@ -5,7 +5,13 @@ module Mastery
         (class << self; self; end).send(:define_method, :__accept__, &proxy)
         __accept__(message_name.to_s, args)
       elsif block = cap[message_name]
-        if args.size == block.arity
+        arity_range = if block.arity < 0
+          -(block.arity + 1)..(1.0/0.0)
+        else
+          [block.arity]
+        end
+
+        if arity_range.include?(args.size)
           (class << self; self; end).send(:define_method, :__accept__, &block)
           __accept__(*args)
         else
