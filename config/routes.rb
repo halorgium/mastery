@@ -1,8 +1,8 @@
 Mastery::Application.routes.draw do
-  resources :spikes
+  resources :spikes, :only => [:show]
 
-  resources :vats do
-    resources :authorities
+  resources :vats, :only => [] do
+    resources :authorities, :only => [:show, :update]
   end
 
   # The priority is based upon order of creation:
