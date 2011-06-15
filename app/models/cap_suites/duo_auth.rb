@@ -8,9 +8,16 @@ module CapSuites
     end
 
     define :factory do
-      accepts :make do |username,target_authority,message|
+      accepts :make do |username,target_authority,message,args|
         akey = SecureRandom.hex(40)
-        authority = vat.make_authority(DuoAuth.name, :approver, data.merge(:akey => akey, :username => username, :target_authority => target_authority, :message => message))
+        new_data = {
+          :akey => akey,
+          :username => username,
+          :target_authority => target_authority,
+          :message => message,
+          :args => args
+        }
+        authority = vat.make_authority(DuoAuth.name, :approver, data.merge(new_data))
         {:approver_authority => authority}
       end
     end

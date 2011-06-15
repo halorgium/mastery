@@ -9,7 +9,7 @@ $(($) ->
       $("#factory_authority").val(result.result.factory_authority.url)
 
   make_approver = ->
-    $D.run($("#factory_authority").val(), "make", $("#username").val(), $("#target_authority").val(), $("#message").val()).then (result) ->
+    $D.run($("#factory_authority").val(), "make", $("#username").val(), $("#target_authority").val(), $("#message").val(), $("#args").val()).then (result) ->
       $("#approver_authority").val(result.result.approver_authority.url)
 
   request_approval = ->
