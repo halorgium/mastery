@@ -1,0 +1,99 @@
+<h1>Printing Company and Customer Demo</h1>
+
+<span id="setup">
+  <h2>Bootstrapping</h2>
+
+  <div>
+    If you have not got access to authorities but have access to a Root
+    authority, you can specify it here and we'll generate authorities as needed.
+  </div>
+
+  <input id="root_authority" size="100" />
+</span>
+
+<span id="company">
+  <h2>Acting as the Company</h2>
+
+  <h3>Creating a Vat for the Printing Company</h2>
+
+  <div>This will create a Data factory authority which allow you to then store data.</div>
+  <button id="create_data_factory">Create Data Factory</button>
+
+  <div>
+    <h4>Authorities</h4>
+    <ul>
+      <li><input id="data_factory_authority" size="100" /></li>
+    </ul>
+  </div>
+
+  <h3>Storing Data in the Vat</h3>
+
+  <div>This will store the data below into an authority and give you several authorities.</div>
+  <input id="data" size="40" />
+  <div><button id="store_data">Store Data</button></div>
+
+  <div>
+    <h4>Authorities</h4>
+    <ul>
+      <li>Full: <input id="full_data_authority" size="100" /></li>
+      <li>Write: <input id="write_data_authority" size="100" /></li>
+      <li>Read: <input id="read_data_authority" size="100" /></li>
+    </ul>
+  </div>
+</div>
+
+<div id="customer_owner">
+  <h2>Acting as the Owner of Customer</h2>
+
+  <h3>Creating a Vat for the revokable authorities</h3>
+
+  <div>This will create a Revoke factory authority which allow you to wrap authorities for later revoking.</div>
+  <div><button id="create_revoke_factory">Create Revoke Factory</button></div>
+
+  <div>
+    <h4>Authorities</h4>
+    <ul>
+      <li><input id="revoke_factory_authority" size="100" /></li>
+    </ul>
+  </div>
+
+  <h3>Giving someone else revokable access to the Data</h3>
+
+  <div>This will wrap the authority below and allow you to revoke the authority at any time.</div>
+  <input id="target_authority" size="100" />
+  <div><button id="create_revoke">Create Revoke</button></div>
+
+  <div>
+    <h4>Authorities</h4>
+    <ul>
+      <li>Proxy: <input id="proxy_authority" size="100" /></li>
+      <li>Revoker: <input id="revoker_authority" size="100" /></li>
+    </ul>
+  </div>
+
+  <h3>Revoking the access to the Data</h3>
+
+  <div>This will revoke the proxy authority.</div>
+  <input id="revoker_authority2" size="100" />
+  <div><button id="run_revoke">Revoke Access</button></div>
+
+  <div>
+    <pre id="revoke_result"></pre>
+  </div>
+</div>
+
+<div id="customer_employee">
+  <h2>Acting as an Employee of Customer</h2>
+
+  <h3>Acting upon your authority</h3>
+
+  <div>This will attempt to use your authority</div>
+  <input id="employee_authority" size="100" />
+  <div><button id="run_authority">Run Authority</button></div>
+
+  <div>
+    <pre id="employee_result"></pre>
+  </div>
+</div>
+
+<%= javascript_include_tag "custom/printing" %>
