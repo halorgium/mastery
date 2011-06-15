@@ -1,0 +1,77 @@
+<h1>Duo Auth Capabilities</h1>
+
+<span id="setup">
+  <h2>Bootstrapping</h2>
+
+  <div>
+    If you have not got access to authorities but have access to a Root
+    authority, you can specify it here and we'll generate authorities as needed.
+  </div>
+
+  <div>
+    <h4>Authorities</h4>
+    <ul>
+      <li>Root: <input id="root_authority" size="100" /></li>
+      <li>Meta Factory: <input id="meta_factory_authority" size="100" /></li>
+    </ul>
+  </div>
+</span>
+
+<span id="main">
+  <h2>Generating a Duo approver factory</h2>
+
+  <div>
+    This will return you an authority specific to your Duo Web Integration.
+    Using this you will be able to create approvers for a specific username
+    wrapping a target authority with a specific message.
+  </div>
+
+  <input id="ikey" size="100" />
+  <input id="skey" size="100" />
+  <input id="host" size="100" />
+  <button id="make_factory">Make Approver Factory</button>
+
+  <div>
+    <h4>Authorities</h4>
+    <ul>
+      <li>Factory: <input id="factory_authority" size="100" /></li>
+    </ul>
+  </div>
+
+  <h2>Generating a Duo approver</h2>
+
+  <div>
+    This will return you an authority for this particular username which when
+    invoked will ask the user to approve the request and then will invoke the
+    target authority and return the result.
+  </div>
+
+  <input id="target_authority" size="100" />
+  <input id="message" size="100" />
+  <input id="username" size="100" />
+  <button id="make_approver">Make Approver</button>
+
+  <div>
+    <h4>Authorities</h4>
+    <ul>
+      <li>Approver: <input id="approver_authority" size="100" /></li>
+    </ul>
+  </div>
+
+  <h2>Request Approval</h2>
+
+  <div>Now we can act on this authority if the user approves the request.</div>
+
+  <button id="request_approval">Request Approval</button>
+
+  <%= javascript_include_tag "custom/Duo-Web-v1" %>
+
+  <iframe id="duo_iframe" width="500" height="800" frameborder="0" allowtransparency="true" style="background: transparent;"></iframe>
+
+  <div>
+    Result:
+    <pre id="result"></pre>
+  </div>
+</span>
+
+<%= javascript_include_tag "custom/duo_auth" %>
