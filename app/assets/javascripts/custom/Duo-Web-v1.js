@@ -294,6 +294,8 @@ var Duo = {
             return;
         }
 
+        iframe.show();
+
         var args = $.param({
             'tx': Duo._duo_sig,
             'parent': document.location.href

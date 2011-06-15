@@ -26,9 +26,9 @@
     wrapping a target authority with a specific message.
   </div>
 
-  <input id="ikey" size="100" />
-  <input id="skey" size="100" />
-  <input id="host" size="100" />
+  <div><label>Integration key: <input id="ikey" size="100" /></label></div>
+  <div><label>Secret key: <input id="skey" size="100" /></label></div>
+  <div><label>API hostname: <input id="host" size="100" /></label></div>
   <button id="make_factory">Make Approver Factory</button>
 
   <div>
@@ -46,9 +46,9 @@
     target authority and return the result.
   </div>
 
-  <input id="target_authority" size="100" />
-  <input id="message" size="100" />
-  <input id="username" size="100" />
+  <div><label>Target authority: <input id="target_authority" size="100" /></label></div>
+  <div><label>Message to send: <input id="message" size="100" /></label></div>
+  <div><label>Duo username: <input id="username" size="100" /></label></div>
   <button id="make_approver">Make Approver</button>
 
   <div>
@@ -66,7 +66,7 @@
 
   <%= javascript_include_tag "custom/Duo-Web-v1" %>
 
-  <iframe id="duo_iframe" width="500" height="800" frameborder="0" allowtransparency="true" style="background: transparent;"></iframe>
+  <iframe id="duo_iframe" width="500" height="400" frameborder="0" allowtransparency="true" style="background: transparent; display: none;"></iframe>
 
   <div>
     Result:
